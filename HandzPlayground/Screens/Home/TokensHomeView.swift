@@ -16,8 +16,9 @@ struct TokensHomeView: View {
                     ColorTokensView()
                 }
 
-                Label("Typography", systemImage: "textformat")
-                    .foregroundColor(.secondary)
+                NavigationLink("Typography") {
+                    TypographyTokensView()
+                }
 
                 Label("Spacing", systemImage: "arrow.left.and.right")
                     .foregroundColor(.secondary)
