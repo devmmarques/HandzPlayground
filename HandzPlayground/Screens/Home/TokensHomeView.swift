@@ -12,19 +12,29 @@ struct TokensHomeView: View {
     var body: some View {
         NavigationStack {
             List {
-                NavigationLink("🎨 Colors") {
+                NavigationLink {
                     ColorTokensView()
+                } label: {
+                    Label("Colors", systemImage: "paintpalette.fill")
                 }
 
-                NavigationLink("Typography") {
+                NavigationLink {
                     TypographyTokensView()
+                } label: {
+                    Label("Typography", systemImage: "textformat.size")
                 }
 
-                Label("Spacing", systemImage: "arrow.left.and.right")
-                    .foregroundColor(.secondary)
+                NavigationLink {
+                    SpacingTokensView()
+                } label: {
+                    Label("Spacing", systemImage: "arrow.left.and.right")
+                }
 
-                Label("Radius", systemImage: "square.on.circle")
-                    .foregroundColor(.secondary)
+                NavigationLink {
+                    RadiusTokensView()
+                } label: {
+                    Label("Radius", systemImage: "square.on.circle")
+                }
             }
             .navigationTitle("Design Tokens")
         }
