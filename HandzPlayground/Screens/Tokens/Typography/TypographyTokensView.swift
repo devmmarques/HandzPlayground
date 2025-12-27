@@ -15,7 +15,7 @@ struct TypographyTokensView: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 32) {
+            LazyVStack(alignment: .leading, spacing: DSSpacing.value(.xl)) {
 
                 themeSelector
 
@@ -107,7 +107,7 @@ struct TypographyTokensView: View {
                     .foregroundColor(.secondary)
             }
 
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: DSSpacing.value(.lg)) {
                 ForEach(tokens, id: \.0) { token, label in
                     typographyRow(token: token, label: label)
                 }
@@ -128,7 +128,7 @@ struct TypographyTokensView: View {
         label: String
     ) -> some View {
 
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: DSSpacing.value(.xs)) {
 
             Text(label)
                 .font(DSTypography.font(token))

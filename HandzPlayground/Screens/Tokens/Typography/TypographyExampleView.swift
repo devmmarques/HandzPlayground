@@ -11,7 +11,7 @@ struct TypographyExampleView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: DSSpacing.value(.lg)) {
 
                 Text("Product Title")
                     .font(DSTypography.font(.displayMedium))
