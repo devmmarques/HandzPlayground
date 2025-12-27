@@ -6,12 +6,19 @@
 //
 import SwiftUI
 import HandzDesignSystem
+import SwiftUI
+import HandzDesignSystem
 
 struct TypographyTokensView: View {
+
+    @StateObject private var viewModel = TypographyThemeViewModel()
 
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 32) {
+
+                themeSelector
+
                 typographyGroup(
                     title: "Display",
                     description: "Used for marketing and high emphasis content",
@@ -64,6 +71,23 @@ struct TypographyTokensView: View {
         .navigationTitle("Typography")
     }
 
+    // MARK: - Theme Selector
+
+    private var themeSelector: some View {
+        VStack(alignment: .leading, spacing: 8) {
+
+            Text("Theme")
+                .font(DSTypography.font(.labelLarge))
+
+            Picker("Theme", selection: $viewModel.selectedTheme) {
+                ForEach(TypographyThemeOption.allCases) { option in
+                    Text(option.rawValue).tag(option)
+                }
+            }
+            .pickerStyle(.segmented)
+        }
+    }
+
     // MARK: - Group
 
     private func typographyGroup(
@@ -77,7 +101,6 @@ struct TypographyTokensView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(DSTypography.font(.headingMedium))
-                
 
                 Text(description)
                     .font(DSTypography.font(.bodySmall))
@@ -110,7 +133,7 @@ struct TypographyTokensView: View {
             Text(label)
                 .font(DSTypography.font(token))
 
-            HStack(spacing: 8) {
+            HStack {
                 Text(tokenName(token))
                     .font(DSTypography.font(.caption))
                     .foregroundColor(.secondary)
