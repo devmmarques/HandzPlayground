@@ -12,61 +12,109 @@ struct ButtonPlaygroundView: View {
 
     @StateObject private var viewModel = ButtonSimulatorViewModel()
 
+    @State private var isVariantSheetPresented = false
+    @State private var isStateSheetPresented = false
+
     var body: some View {
         ScrollView {
-            VStack(spacing: 32) {
-
+            VStack(spacing: DSSpacing.value(.xl)) {
                 previewSection
-
                 Divider()
-
                 controlsSection
             }
             .padding()
         }
         .navigationTitle("DSButton")
+        .sheet(isPresented: $isVariantSheetPresented) {
+            variantBottomSheet
+        }
+        .sheet(isPresented: $isStateSheetPresented) {
+            stateBottomSheet
+        }
     }
-}
+    
+    var variantSelector: some View {
+        VStack(alignment: .leading, spacing: DSSpacing.value(.xs)) {
+            Text("Variant")
+                .font(.caption)
+                .foregroundColor(.secondary)
 
-private extension ButtonPlaygroundView {
+            comboBoxLabel(text: viewModel.variant.displayName)
+                .onTapGesture {
+                    isVariantSheetPresented = true
+                }
+                .accessibilityLabel("Seletor da variação do DSButton")
+                .accessibilityValue(viewModel.variant.displayName)
+        }
+    }
+    
+    var stateSelector: some View {
+        VStack(alignment: .leading, spacing: DSSpacing.value(.xs)) {
+            Text("State")
+                .font(.caption)
+                .foregroundColor(.secondary)
 
+            comboBoxLabel(text: viewModel.state.displayName)
+                .onTapGesture {
+                    isStateSheetPresented = true
+                }
+                .accessibilityLabel("Seletor do estado do DSButton")
+                .accessibilityValue(viewModel.state.displayName)
+        }
+    }
+
+    var variantBottomSheet: some View {
+        SelectionBottomSheet(
+            title: "Selecione a variação do DSButton",
+            items: DSButtonVariant.allCases,
+            selected: viewModel.variant,
+            displayName: { $0.displayName }
+        ) { selectedVariant in
+            viewModel.variant = selectedVariant
+            isVariantSheetPresented = false
+        }
+    }
+    
+    var stateBottomSheet: some View {
+        SelectionBottomSheet(
+            title: "Selecione o Estado do DSButton",
+            items: DSButtonState.allCases,
+            selected: viewModel.state,
+            displayName: { $0.displayName }
+        ) { selectedState in
+            viewModel.state = selectedState
+            isStateSheetPresented = false
+        }
+    }
+    
     var previewSection: some View {
         PlaygroundSection(title: "Preview") {
             DSButton(
-                viewModel.state == .loading ? "Loading..." : viewModel.title,
+                viewModel.state == .loading ? "Carregando..." : viewModel.title,
                 variant: viewModel.variant,
-                state: viewModel.state,
-                action: {
-                    if viewModel.state == .normal {
-                        viewModel.simulateLoading()
-                    }
+                state: viewModel.state
+            ) {
+                if viewModel.state == .normal {
+                    viewModel.simulateLoading()
                 }
-            )
+            }
         }
     }
-}
-
-private extension ButtonPlaygroundView {
-
+    
+    
     var controlsSection: some View {
-        PlaygroundSection(title: "Controls") {
-            VStack(spacing: 20) {
-
+        PlaygroundSection(title: "Playground") {
+            VStack(spacing: DSSpacing.value(.lg)) {
                 titleField
-
                 variantSelector
-
                 stateSelector
             }
         }
     }
-}
-
-private extension ButtonPlaygroundView {
-
+    
     var titleField: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Title")
+        VStack(alignment: .leading, spacing: DSSpacing.value(.xs)) {
+            Text("Título")
                 .font(.caption)
                 .foregroundColor(.secondary)
 
@@ -74,57 +122,7 @@ private extension ButtonPlaygroundView {
                 .textFieldStyle(.roundedBorder)
         }
     }
-}
-
-private extension ButtonPlaygroundView {
-
-    var variantSelector: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Variant")
-                .font(.caption)
-                .foregroundColor(.secondary)
-
-            Menu {
-                ForEach(DSButtonVariant.allCases, id: \.self) { variant in
-                    Button(variant.displayName) {
-                        viewModel.variant = variant
-                    }
-                }
-            } label: {
-                comboBoxLabel(text: viewModel.variant.displayName)
-            }
-            .accessibilityLabel("Variant seletor")
-            .accessibilityValue(viewModel.variant.displayName)
-        }
-    }
-}
-
-private extension ButtonPlaygroundView {
-
-    var stateSelector: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("State")
-                .font(.caption)
-                .foregroundColor(.secondary)
-
-            Menu {
-                ForEach(DSButtonState.allCases, id: \.self) { state in
-                    Button(state.displayName) {
-                        viewModel.state = state
-                    }
-                }
-            } label: {
-                comboBoxLabel(text: viewModel.state.displayName)
-            }
-
-            .accessibilityLabel("State seletor")
-            .accessibilityValue(viewModel.state.displayName)
-        }
-    }
-}
-
-private extension ButtonPlaygroundView {
-
+    
     func comboBoxLabel(text: String) -> some View {
         HStack {
             Text(text)
@@ -134,8 +132,7 @@ private extension ButtonPlaygroundView {
         }
         .padding()
         .background(Color(.secondarySystemBackground))
-        .cornerRadius(8)
+        .cornerRadius(DSRadius.value(.sm))
     }
 }
-
 
