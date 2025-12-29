@@ -14,6 +14,9 @@ struct ButtonPlaygroundView: View {
 
     @State private var isVariantSheetPresented = false
     @State private var isStateSheetPresented = false
+    @State private var isSizeSheetPresented = false
+    @State private var isBrandSheetPresented = false
+
 
     var body: some View {
         ScrollView {
@@ -30,6 +33,10 @@ struct ButtonPlaygroundView: View {
         }
         .sheet(isPresented: $isStateSheetPresented) {
             stateBottomSheet
+        }.sheet(isPresented: $isSizeSheetPresented) {
+            sizeBottomSheet
+        }.sheet(isPresented: $isBrandSheetPresented) {
+            brandBottomSheet
         }
     }
     
@@ -91,8 +98,10 @@ struct ButtonPlaygroundView: View {
         PlaygroundSection(title: "Preview") {
             DSButton(
                 viewModel.state == .loading ? "Carregando..." : viewModel.title,
+                size: viewModel.size,
                 variant: viewModel.variant,
-                state: viewModel.state
+                state: viewModel.state,
+                theme: viewModel.selectedBrand.buttonTheme
             ) {
                 if viewModel.state == .normal {
                     viewModel.simulateLoading()
@@ -101,13 +110,41 @@ struct ButtonPlaygroundView: View {
         }
     }
     
+    var brandSelector: some View {
+        VStack(alignment: .leading, spacing: DSSpacing.value(.xs)) {
+            Text("Brand")
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            comboBoxLabel(text: viewModel.selectedBrand.displayName)
+                .onTapGesture {
+                    isBrandSheetPresented = true
+                }
+        }
+    }
+    
+    var brandBottomSheet: some View {
+        SelectionBottomSheet(
+            title: "Selecione a Marca",
+            items: BrandOption.allCases,
+            selected: viewModel.selectedBrand,
+            displayName: { $0.displayName }
+        ) { selectedBrand in
+            viewModel.selectedBrand = selectedBrand
+            isBrandSheetPresented = false
+        }
+    }
+
+    
     
     var controlsSection: some View {
         PlaygroundSection(title: "Playground") {
             VStack(spacing: DSSpacing.value(.lg)) {
                 titleField
                 variantSelector
+                sizeSelector
                 stateSelector
+                brandSelector
             }
         }
     }
@@ -134,5 +171,34 @@ struct ButtonPlaygroundView: View {
         .background(Color(.secondarySystemBackground))
         .cornerRadius(DSRadius.value(.sm))
     }
+    
+    var sizeSelector: some View {
+        VStack(alignment: .leading, spacing: DSSpacing.value(.xs)) {
+            Text("Size")
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            comboBoxLabel(text: viewModel.size.displayName)
+                .onTapGesture {
+                    isSizeSheetPresented = true
+                }
+                .accessibilityLabel("Seletor de tamanho do DSButton")
+                .accessibilityValue(viewModel.size.displayName)
+        }
+    }
+    
+    var sizeBottomSheet: some View {
+        SelectionBottomSheet(
+            title: "Selecione o tamanho do DSButton",
+            items: DSButtonSize.allCases,
+            selected: viewModel.size,
+            displayName: { $0.displayName }
+        ) { selectedSize in
+            viewModel.size = selectedSize
+            isSizeSheetPresented = false
+        }
+    }
+
+
 }
 

@@ -14,6 +14,8 @@ final class ButtonSimulatorViewModel: ObservableObject {
     @Published var title: String = "Button"
     @Published var variant: DSButtonVariant = .primary
     @Published var state: DSButtonState = .normal
+    @Published var size: DSButtonSize = .medium
+    @Published var selectedBrand: BrandOption = .handz
 
     func simulateLoading() {
         guard state != .loading else { return }
