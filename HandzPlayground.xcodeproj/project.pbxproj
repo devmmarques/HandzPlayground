@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D47C2B632F036729004D8EEC /* HandzDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = D47C2B622F036729004D8EEC /* HandzDesignSystem */; };
 		D4E743A32EFF228F00D6645A /* HandzDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = D4E743A22EFF228F00D6645A /* HandzDesignSystem */; };
 		D4E743A62EFF22F000D6645A /* HandzDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = D4E743A52EFF22F000D6645A /* HandzDesignSystem */; };
 		D4E743D62EFF278200D6645A /* HandzDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = D4E743D52EFF278200D6645A /* HandzDesignSystem */; };
@@ -30,6 +31,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E743A32EFF228F00D6645A /* HandzDesignSystem in Frameworks */,
+				D47C2B632F036729004D8EEC /* HandzDesignSystem in Frameworks */,
 				D4E743D62EFF278200D6645A /* HandzDesignSystem in Frameworks */,
 				D4E743A62EFF22F000D6645A /* HandzDesignSystem in Frameworks */,
 			);
@@ -77,6 +79,7 @@
 				D4E743A22EFF228F00D6645A /* HandzDesignSystem */,
 				D4E743A52EFF22F000D6645A /* HandzDesignSystem */,
 				D4E743D52EFF278200D6645A /* HandzDesignSystem */,
+				D47C2B622F036729004D8EEC /* HandzDesignSystem */,
 			);
 			productName = HandzPlayground;
 			productReference = D4E743932EFF226400D6645A /* HandzPlayground.app */;
@@ -107,7 +110,7 @@
 			mainGroup = D4E7438A2EFF226400D6645A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				D4E743D42EFF278200D6645A /* XCLocalSwiftPackageReference "../HandzDesignSystem" */,
+				D47C2B612F036729004D8EEC /* XCRemoteSwiftPackageReference "HandzDesignSystem" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D4E743942EFF226400D6645A /* Products */;
@@ -361,14 +364,23 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		D4E743D42EFF278200D6645A /* XCLocalSwiftPackageReference "../HandzDesignSystem" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../HandzDesignSystem;
+/* Begin XCRemoteSwiftPackageReference section */
+		D47C2B612F036729004D8EEC /* XCRemoteSwiftPackageReference "HandzDesignSystem" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devmmarques//HandzDesignSystem.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D47C2B622F036729004D8EEC /* HandzDesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D47C2B612F036729004D8EEC /* XCRemoteSwiftPackageReference "HandzDesignSystem" */;
+			productName = HandzDesignSystem;
+		};
 		D4E743A22EFF228F00D6645A /* HandzDesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HandzDesignSystem;

@@ -57,7 +57,7 @@ public struct PartnerButtonTheme: ButtonTheme {
     public func textColor(variant: DSButtonVariant, state: DSButtonState) -> Color {
         switch variant {
         case .primary:
-            return DSColor.Text.secondary
+            return DSColor.Text.onFill
         case .secondary:
             switch state {
             case .disabled:

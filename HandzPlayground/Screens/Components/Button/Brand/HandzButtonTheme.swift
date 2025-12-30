@@ -25,7 +25,7 @@ public struct HandzButtonTheme: ButtonTheme {
     public func textColor(variant: DSButtonVariant, state: DSButtonState) -> Color {
         switch variant {
         case .primary:
-            return DSColor.Text.primary
+            return DSColor.Text.onFill
         case .secondary:
             switch state {
             case .disabled:

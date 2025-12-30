@@ -18,7 +18,7 @@ struct ComponentsHomeView: View {
             }
 
             NavigationLink {
-                
+                TextFieldPlaygroundView()
             } label: {
                 Label("DSTextField", systemImage: "rectangle.and.pencil.and.ellipsis")
             }
