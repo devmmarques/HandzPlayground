@@ -49,6 +49,7 @@ open HandzPlayground.xcodeproj
 
 ## 🧩 Estrutura do Projeto
 
+```
 HandzPlayground
 ├── Screens
 │ ├── Components
@@ -60,7 +61,7 @@ HandzPlayground
 │ ├── Tokens
 │ └── ...
 └── HandzPlaygroundApp
-
+```
 ---
 
 ## Tokens de Design
