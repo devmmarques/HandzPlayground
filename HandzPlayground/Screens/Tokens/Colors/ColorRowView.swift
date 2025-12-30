@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import HandzDesignSystem
 
 struct ColorRowView: View {
 
     let item: ColorTokenItem
 
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: DSSpacing.value(.md)) {
             RoundedRectangle(cornerRadius: 8)
                 .fill(item.color)
                 .frame(width: 44, height: 44)

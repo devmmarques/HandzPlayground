@@ -1,0 +1,15 @@
+{
+  "originHash" : "db4cc3b3e16c805a255fe1c53d107cac9226eda932aa2767d28defe42e7327fb",
+  "pins" : [
+    {
+      "identity" : "handzdesignsystem",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/devmmarques//HandzDesignSystem.git",
+      "state" : {
+        "revision" : "e481ea4921396dda068309f9ed629a5e9b3fbb3f",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
